@@ -37,13 +37,15 @@ Extract features (mcep, f0) from each speech file.  The features are stored in p
 python3 generate_features.py --source_dir <source (neutral) emotion wav files> --target_dir <target emotion wav files> --save_dir <directory to save extracted features> --fraction <train/valid/test>
 ```
 
-The above code will create a new file momenta <fraction.mat> at the save_dir location. The feature extraction currently uses DTW-alignment between source and target emotional audio files but it is not a strict requirement. The other parameters that can be played with are the n_mfc,  n_frames, window_len (hard-coded) and window_stride (hard-coded) in the generate_features.py file. 
+The above code will create a new file <fraction.mat> at the save_dir location. The feature extraction currently uses DTW-alignment between source and target emotional audio files but it is not a strict requirement. The other parameters that can be played with are the n_mfc,  n_frames, window_len (hard-coded) and window_stride (hard-coded) in the generate_features.py file. 
 
 We now have the complete data pair (source and target emotion) required for training the model.
 
 ## Neural Network architecture for Conversion
+
 ![Alt text](images/architecture.png?raw=true "Title")
-We use fully convolutional neural network for the sampling block of the generator and the discriminator. The diffeomorphic registration is carried out by an RNN-block having fixed/non-learnable parameters. 
+
+We use fully convolutional neural network for the sampling block of the generator and the discriminator. The diffeomorphic registration is carried out by an RNN-block having fixed/non-learnable parameters. The discriminator in VCGAN is a joint density discriminator which establishes a strong dependency between the two generators in cycle-GAN. It has the additional benefit of matching generated samples in a cyclic distribution sense. The momenta based registration is a strong regularizer for the GAN to work in a stable manner and capture the dynamic range of F0/pitch values across speaker variations.
 
 ## Training the Encoder-Decoder-Predictor model
 ```
