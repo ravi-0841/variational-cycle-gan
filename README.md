@@ -1,21 +1,6 @@
-
-
-![Alt text](images/training_validation.png?raw=true "Title")
-![Alt text](images/example_pitch.png?raw=true "Title")
-
-
 # Variational Cycle-GAN model for Emotion Conversion
 
 Tensorflow implementation of our [VCGAN](https://www.isca-speech.org/archive/interspeech_2020/shankar20c_interspeech.html) using momenta parameterization of diffeomorphic registration as an intermediary for prosody (F0 and Energy) manipulation. 
-
-
-## Neural Network architecture for Conversion
-![Alt text](images/architecture.png?raw=true "Title")
-We use fully convolutional neural network for the sampling block of the generator and the discriminator. The diffeomorphic registration is carried out by an RNN-block having fixed/non-learnable parameters. 
-
-## Demo of momenta based diffeomorphic registration
-![Alt text](images/warping.gif?raw=true "Title")
-
 
 ## Main Dependencies
 
@@ -62,6 +47,13 @@ The above code will create a new file momenta_<input_file.mat> in the same folde
 
 We now have the complete data required for training the model :)
 
+![Alt text](images/training_validation.png?raw=true "Title")
+![Alt text](images/example_pitch.png?raw=true "Title")
+
+## Neural Network architecture for Conversion
+![Alt text](images/architecture.png?raw=true "Title")
+We use fully convolutional neural network for the sampling block of the generator and the discriminator. The diffeomorphic registration is carried out by an RNN-block having fixed/non-learnable parameters. 
+
 ## Training the Encoder-Decoder-Predictor model
 ```
 python3 train.py --emo_pair <neu-ang/neu-hap/neu-sad> --train_dir <directory containing training momenta_.mat data> --model_dir <directory to save trained model> 
@@ -77,6 +69,9 @@ To convert a set of audio files (.wav) from one emotion to another, you need to 
 ```
 python3 convert.py --emo_pair <neu-ang/neu-hap/neu-sad> --model_path <complete path to .ckpt file> --data_dir <directory containing .wav files for conversion> --output_dir <directory for saving the converted files> 
 ```
+
+## Demo of momenta based diffeomorphic registration
+![Alt text](images/warping.gif?raw=true "Title")
 
 ## Further links
 [Download the pre-trained model here](https://drive.google.com/file/d/17EEFnz6-RzmIZn9xqCkCn0yh0Ny5wc6R/view?usp=sharing)
