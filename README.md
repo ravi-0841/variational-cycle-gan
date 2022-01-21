@@ -47,18 +47,23 @@ We now have the complete data pair (source and target emotion) required for trai
 
 We use fully convolutional neural network for the sampling block of the generator and the discriminator. The diffeomorphic registration is carried out by an RNN-block having fixed/non-learnable parameters. The discriminator in VCGAN is a joint density discriminator which establishes a strong dependency between the two generators in cycle-GAN. It has the additional benefit of matching generated samples in a cyclic distribution sense. The momenta based registration is a strong regularizer for the GAN to work in a stable manner and capture the dynamic range of F0/pitch values across speaker variations.
 
-## Training the Encoder-Decoder-Predictor model
+## Training the VCGAN model
 ```
-python3 train.py --emo_pair <neu-ang/neu-hap/neu-sad> --train_dir <directory containing training momenta_.mat data> --model_dir <directory to save trained model> 
+python3 main.py --emo_pair <neu-ang/neu-hap/neu-sad> --train_dir <directory containing training train.mat file for a specific emotion pair> --model_dir <directory to save trained model> --model_name <name of the model to be saved as checkpoints>
 ```
-Hyperparameters like learning rate, minibatch-size, #epochs, etc can be modified in the train.py file. To modify the architecture of neural networks, check out the nn_models.py file. It contains the description of neural nets for encoder, decoder and predictor (formerly generator). 
-
-model.py defines a class that creates all the necessary placeholders, variables and functions to use for training and testing. It also generates the summaries which can be visualized using tensorboard module. 
+Hyperparameters like learning rate, minibatch-size, #epochs, etc can be modified in the main.py file. To modify the architecture of neural networks, check out the nn_models.py file. It contains the description of neural nets for generator and discriminator. 
+Note: This model is mainly for the F0/pitch conversion. We separately train an mfcc conversion model using [MFCC model](https://github.com/leimao/Voice-Converter/CycleGAN).
 
 Note: There will be a separate model for every pair of emotion that the corpus contains.  
 
+## Generator and Discriminator loss during F0 training
+
 ![Alt text](images/training_validation.png?raw=true "Title")
+
+## Example of F0 conversion from a source emotion to target and inverse
+
 ![Alt text](images/example_pitch.png?raw=true "Title")
+
 ## Testing the model
 
 To convert a set of audio files (.wav) from one emotion to another, you need to load the appropriate emotion-pair model and provide path to the data directory. 
