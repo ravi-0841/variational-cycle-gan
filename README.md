@@ -68,7 +68,7 @@ Note: There will be a separate model for every pair of emotion that the corpus c
 
 To convert a set of audio files (.wav) from one emotion to another, you need to load the appropriate emotion-pair model and provide path to the data directory. 
 ```
-python3 convert.py --emo_pair <neu-ang/neu-hap/neu-sad> --model_path <complete path to .ckpt file> --data_dir <directory containing .wav files for conversion> --output_dir <directory for saving the converted files> 
+python3 convert_separate.py --emo_pair <neu-ang/neu-hap/neu-sad> --model_f0_path <complete path to .ckpt file of F0 model> --model_mcep_path <complete path to .ckpt file of MCEP model> --mcep_nmz_path <MCEP model uses cohort statistics for normalization before conversion> --data_dir <directory containing .wav files for conversion> --output_dir <directory for saving the converted files> 
 ```
 
 ## Demo of momenta based diffeomorphic registration
