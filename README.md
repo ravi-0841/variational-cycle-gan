@@ -52,7 +52,7 @@ We use fully convolutional neural network for the sampling block of the generato
 python3 main.py --emo_pair <neu-ang/neu-hap/neu-sad> --train_dir <directory containing training train.mat file for a specific emotion pair> --model_dir <directory to save trained model> --model_name <name of the model to be saved as checkpoints>
 ```
 Hyperparameters like learning rate, minibatch-size, #epochs, etc can be modified in the main.py file. To modify the architecture of neural networks, check out the nn_models.py file. It contains the description of neural nets for generator and discriminator. 
-Note: This model is mainly for the F0/pitch conversion. We separately train an mfcc conversion model using [MFCC model](https://github.com/leimao/Voice-Converter-CycleGAN).
+Note: This model is mainly for the F0/pitch conversion. We separately train an mfcc conversion model using [this technique](https://github.com/leimao/Voice-Converter-CycleGAN).
 
 Note: There will be a separate model for every pair of emotion that the corpus contains.  
 
